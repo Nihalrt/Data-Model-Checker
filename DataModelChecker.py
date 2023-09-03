@@ -5,6 +5,7 @@ import random
 # Bundles together functions for probing a MySQL database to confirm
 # whether it adheres to specific properties of a logical/relational schema.
 # Can be used to verify that a MySQL database correctly implements a design.
+# Capi
 class DataModelChecker:
 
     # Ctor sets the connection details for this model checker
