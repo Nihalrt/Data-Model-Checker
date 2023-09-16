@@ -5,7 +5,6 @@ import random
 # Bundles together functions for probing a MySQL database to confirm
 # whether it adheres to specific properties of a logical/relational schema.
 # Can be used to verify that a MySQL database correctly implements a design.
-# Capi
 class DataModelChecker:
 
     # Ctor sets the connection details for this model checker
@@ -16,15 +15,20 @@ class DataModelChecker:
         self.password = password
         self.database = database
 
-    # Predicate function that connects to the database and confirms
-    # whether or not a list of attributes is set up as a (super)key for a given table
-    # For example, if attributes contains table_name R and attributes [x, y],
-    # this function returns true if (x,y) is enforced as a key in R
-    # @see Util.Attributes
-    # @pre the tables and attributes in attributes must already exist
 
     def confirmSuperkey(self, attributes):
-        # TODO: Implement me!
+        '''
+
+        PARAMETERS : Attributes
+
+        DEFINITION : In the context of database management, a superkey is a set of one or more attributes (columns)
+        in a database table that can uniquely identify a tuple (row) in that table. It's essentially a superset of a
+        candidate key, which is a minimal set of attributes that can uniquely identify a tuple. A superkey function
+        doesn't have a standard meaning in this context.
+
+        RETURN VALUE: Boolean
+
+        '''
         try:
             connection = mysql.connector.connect(host=self.host, user=self.username, password=self.password,
                                                  database=self.database)
@@ -70,17 +74,20 @@ class DataModelChecker:
                 return True
             return False
 
-    # Predicate function that connects to the database and confirms
-    # whether `referencing_attributes` is set up as a foreign
-    # key that reference `referenced_attributes`
-    # For example, if referencing_attributes contains table_name R and attributes [x, y]
-    # and referenced_attributes contains table_name S and attributes [a, b]
-    # this function returns true if (x,y) is enforced as a foreign key that references
-    # (a,b) in R
-    # @see Util.Attributes
-    # @pre the tables and attributes in referencing_attributes and referenced_attributes must already exist
+
     def confirmForeignKey( self, referencing_attributes, referenced_attributes):
-        # TODO: Implement me!
+        '''
+
+        PARAMETERS : referencing_attributes, referenced_attributes
+
+        DEFINITION :  A foreign key is a fundamental concept in database design that establishes a
+        relationship between two tables. It enforces referential integrity by ensuring that the values
+        in one table's foreign key column correspond to values in another table's primary key column
+
+        RETURN VALUE :  Boolean
+
+
+        '''
         f = ''
         b = []
         m = []
@@ -127,17 +134,22 @@ class DataModelChecker:
             return False
 
 
-    # Predicate function that connects to the database and confirms
-    # whether or not `referencing_attributes` is set up as a foreign key
-    # that reference `referenced_attributes` using a specific referential integrity `policy`
-    # For example, if referencing_attributes contains table_name R and attributes [x, y]
-    # and referenced_attributes contains table_name S and attributes [a, b]
-    # this function returns true if (x,y) the provided policy is used to manage that foreign key
-    # @see Util.Attributes, Util.RefIntegrityPolicy
-    # @pre The foreign key is valid
-    # @pre policy must be a valid Util.RefIntegrityPolicy
+
     def confirmReferentialIntegrity( self, referencing_attributes, referenced_attributes, policy):
-        # TODO: Implement me!
+        '''
+
+        PARAMETERS : referencing_attributes, referenced_attributes, policy
+
+        DEFINITION : A "Referential Integrity function" in a Data Model Checker typically refers to a feature or
+        function within the tool that checks and enforces referential integrity constraints in a database schema.
+        Referential integrity is a crucial concept in database management, and this function helps ensure that
+        relationships between tables are maintained correctly.
+
+
+        RETURN VALUE :  Boolean
+
+
+        '''
 
 
         def get_column_data_types(cursor, table_name):
@@ -287,32 +299,20 @@ class DataModelChecker:
             return False
 
 
-    # def generate_values(self, attributes):
-    #     values = []
-    #     for _ in range(len(attributes)):
-    #         # Generate random integer values for the given number of attributes
-    #         values.append(random.randint(1, 100))
-    #     return values
-    #
-    # def generate_insert_query(self, table_name, attributes, values):
-    #     value_string = ', '.join(str(value) for value in values)
-    #     return f"INSERT INTO {table_name} ({', '.join(attributes)}) VALUES ({value_string})"
-
-
-
-
-
-
-    # Predicate function that connects to the database and confirms
-    # whether there or not `referencing_attributes` is set up in such as way as to
-    # functionally determine `referenced_attributes`
-    # For example, if referencing_attributes contains table_name R and attributes [x, y]
-    # and referenced_attributes contains table_name S and attributes [a, b]
-    # this function returns true if (x,y) is enforced to functionally determine (a,b) in R
-    # @see Util.Attributes
-    # @pre the tables and attributes in referencing_attributes and referenced_attributes must already exist
     def confirmFunctionalDependency( self, referencing_attributes, referenced_attributes ):
-        # TODO: Implement me!
+        '''
+
+        PARAMETERS : referencing_attributes, referenced_attributes
+
+        DEFINITION : A "Functional Dependency function" in a Data Model Checker is a feature or function
+        within the tool that checks for and enforces functional dependencies within a database schema.
+        Functional dependencies are a fundamental concept in database design and are used to ensure data
+        integrity and eliminate redundancy.
+
+
+        RETURN VALUE :  Boolean
+
+        '''
         def execute_query(query):
             cursor.execute(query)
             return cursor.fetchall()
@@ -369,10 +369,4 @@ class DataModelChecker:
         return True
 
 
-    # Predicate function that connects to the database and confirms
-    # whether or not any tuples in a given table are permitted to violate
-    # a constraint expressed as a SQL snippet.
-    # For example, given `R` and `x >= 0`, this function would return
-    # true if it is not possible to add tuples to `R` with negative `x` values.
-    # @pre sql_predicate must be valid SQL syntax that can be used as is in a WHERE condition
-    # @pre table_name must exist in the database already
+
