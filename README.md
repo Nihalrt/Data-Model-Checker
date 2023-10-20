@@ -1,4 +1,4 @@
-# Data Model Checker for MySQL Databases
+# DataGuard
 
 ## Description
 
