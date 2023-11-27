@@ -20,7 +20,7 @@ The Data Model Checker for MySQL Databases is a versatile Python utility designe
 
 **Function: `confirmSuperkey(attributes)`**
 
-In relational database management, a superkey is a set of one or more attributes (columns) in a database table that can uniquely identify a tuple (row) in that table. This function checks if the provided attributes form a superkey for a table.
+In a relational database management system, a superkey is a set of one or more attributes (columns) in a database table that can uniquely identify a tuple (row) in that table. This function checks if the provided attributes form a superkey for a table.
 
 - **Parameters:**
   - `attributes`: An instance of the `Attributes` class containing the table name and a list of attributes to be checked for being a superkey.
